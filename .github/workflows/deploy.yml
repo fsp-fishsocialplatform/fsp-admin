@@ -1,4 +1,6 @@
-# Builds the Vite app and publishes dist/ to GitHub Pages on every push to main.
+# Builds the Vite app and publishes dist/ to GitHub Pages on every push to the
+# release branch — matching the other repos (fsp-mobile-app/fsp-backend), where
+# pushing to `release` is the deploy trigger and `main` is just integration.
 #
 # One-time setup in the repo: Settings → Pages → Build and deployment →
 # Source = "GitHub Actions". No branch/folder selection needed; this workflow
@@ -7,7 +9,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [release]
   # Allow manual re-runs from the Actions tab.
   workflow_dispatch:
 
