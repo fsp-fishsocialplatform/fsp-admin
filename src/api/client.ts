@@ -100,6 +100,31 @@ export interface Post {
   created_at: string;
 }
 
+// ModerationReview is the machine verdict attached to a queued post.
+export interface ModerationReview {
+  id: string;
+  post_id: string;
+  verdict: string; // pass | reject | flag
+  score: number;
+  labels: string; // JSON string: per-sub-call detail
+  trace_id: string;
+  review_state: string; // needs_human
+  created_at: string;
+}
+
+// ModerationQueueItem pairs a pending post with the machine review that flagged it.
+export interface ModerationQueueItem {
+  post: Post;
+  review: ModerationReview;
+}
+
+export interface QueuePage {
+  items: ModerationQueueItem[];
+  total: number;
+  limit: number;
+  offset: number;
+}
+
 export interface User {
   id: string;
   phone: string;
@@ -146,6 +171,20 @@ export const api = {
 
   restorePost(id: string) {
     return request<unknown>(`/admin/posts/${id}/restore`, { method: 'POST' });
+  },
+
+  moderationQueue(limit: number, offset: number) {
+    return request<QueuePage>(
+      `/admin/moderation/queue?limit=${limit}&offset=${offset}`,
+    );
+  },
+
+  approvePost(id: string) {
+    return request<unknown>(`/admin/posts/${id}/approve`, { method: 'POST' });
+  },
+
+  rejectPost(id: string) {
+    return request<unknown>(`/admin/posts/${id}/reject`, { method: 'POST' });
   },
 
   listUsers(limit: number, offset: number) {

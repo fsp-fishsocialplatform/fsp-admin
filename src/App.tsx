@@ -6,6 +6,7 @@ import AdminLayout from './layouts/AdminLayout';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Posts from './pages/Posts';
+import ModerationQueue from './pages/ModerationQueue';
 import Users from './pages/Users';
 
 // Guards the authenticated area. The token in localStorage is the source of
@@ -29,6 +30,7 @@ export default function App() {
           }
         >
           <Route path="/" element={<Dashboard />} />
+          <Route path="/moderation" element={<ModerationQueue />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/users" element={<Users />} />
         </Route>
