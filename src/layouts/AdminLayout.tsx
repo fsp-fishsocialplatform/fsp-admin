@@ -3,6 +3,7 @@ import {
   DashboardOutlined,
   FileTextOutlined,
   TeamOutlined,
+  SafetyCertificateOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
@@ -12,6 +13,7 @@ const { Header, Sider, Content } = Layout;
 
 const items = [
   { key: '/', icon: <DashboardOutlined />, label: '数据概览' },
+  { key: '/moderation', icon: <SafetyCertificateOutlined />, label: '待复核' },
   { key: '/posts', icon: <FileTextOutlined />, label: '内容管理' },
   { key: '/users', icon: <TeamOutlined />, label: '用户管理' },
 ];
